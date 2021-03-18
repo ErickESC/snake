@@ -46,14 +46,14 @@ jobs:
             json: ${{ env.workspace }} depends.json
             
         # Upload depends artifact raw to DocumentDB using Lambda
-        - name: Invoke storeDependsRawData Lambda
+        - name: Invoke putDataAnalysis Lambda
           id: upload
           uses: gagoar/invoke-aws-lambda@master
           with:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            REGION: us-east-2
-            FunctionName: storeDependsRawData
+            REGION: us-east-1
+            FunctionName: putDataAnalysis
             Payload: ${{ steps.json-depends.outputs.json }}
         
         # See the response
